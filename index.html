@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marcel Christian Halim — Computer Engineer · Data & Automation</title>
+<meta name="description" content="Portfolio of Marcel Christian Halim — final-year Computer Engineer working across data analytics, automation, and financial systems. Experience at Bank Mandiri and Bank Indonesia." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#100f0d;
+    --ink-2:#16140f;
+    --surface:#1b1813;
+    --line:rgba(216,166,87,.16);
+    --line-soft:rgba(236,232,225,.08);
+    --text:#ece8e1;
+    --muted:#9a9388;
+    --muted-2:#6f6a60;
+    --gold:#d8a657;
+    --gold-dim:#a87f3f;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Spline Sans',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* subtle grain + glow atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 78% -10%, rgba(216,166,87,.10), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(216,166,87,.05), transparent 55%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  /* selection + links */
+  ::selection{background:var(--gold);color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+
+  /* mono label */
+  .mono{font-family:'JetBrains Mono',monospace;font-weight:400;letter-spacing:.04em;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gold);
+  }
+
+  /* ---- top bar ---- */
+  header.topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;
+    background:linear-gradient(var(--ink),rgba(16,15,13,.0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:var(--text);}
+  .brand b{color:var(--gold);font-weight:500;}
+  nav.menu{display:flex;gap:26px;}
+  nav.menu a{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;
+    color:var(--muted);transition:color .25s;
+  }
+  nav.menu a:hover{color:var(--text);}
+  @media(max-width:680px){nav.menu{display:none;}}
+
+  /* ---- hero ---- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:130px 0 90px;}
+  .hero-meta{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:34px;}
+  .hero-meta .right{text-align:right;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;line-height:1.9;}
+  h1.name{
+    font-family:'Fraunces',serif;font-weight:500;font-size:clamp(48px,9vw,108px);
+    line-height:.94;letter-spacing:-.02em;color:var(--text);
+  }
+  h1.name .ln{display:block;overflow:hidden;}
+  h1.name .ln span{display:block;}
+  h1.name em{font-style:italic;color:var(--gold);font-weight:400;}
+  .hero-sub{
+    margin-top:30px;max-width:680px;font-size:clamp(17px,2.4vw,20px);color:var(--muted);line-height:1.6;
+  }
+  .hero-sub b{color:var(--text);font-weight:500;}
+  .hero-cta{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;
+    padding:13px 22px;border:1px solid var(--line);border-radius:2px;
+    display:inline-flex;align-items:center;gap:10px;transition:all .25s;color:var(--text);
+  }
+  .btn:hover{border-color:var(--gold);background:rgba(216,166,87,.07);transform:translateY(-2px);}
+  .btn.solid{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:500;}
+  .btn.solid:hover{background:#e6b76b;}
+  .btn .arr{transition:transform .25s;}
+  .btn:hover .arr{transform:translate(3px,-3px);}
+
+  /* ---- section frame ---- */
+  section.block{padding:84px 0;border-top:1px solid var(--line-soft);}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:46px;}
+  .sec-head .num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-dim);letter-spacing:.1em;}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,4vw,38px);letter-spacing:-.01em;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;}
+  .about-grid p{font-size:18px;color:var(--text);line-height:1.7;}
+  .about-grid p + p{margin-top:18px;color:var(--muted);}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  .stat{background:var(--ink);padding:22px 18px;}
+  .stat .v{font-family:'Fraunces',serif;font-size:30px;color:var(--gold);line-height:1;}
+  .stat .l{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:10px;}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+
+  /* experience */
+  .xp{display:grid;grid-template-columns:170px 1fr;gap:30px;padding:30px 0;border-top:1px solid var(--line-soft);transition:padding .3s;}
+  .xp:hover{padding-left:8px;}
+  .xp .when{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);letter-spacing:.03em;padding-top:4px;}
+  .xp .role{font-family:'Fraunces',serif;font-size:22px;font-weight:500;}
+  .xp .org{color:var(--gold);font-size:14.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;margin-top:4px;}
+  .xp .where{color:var(--muted-2);font-size:13.5px;margin-top:2px;}
+  .xp ul{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:7px;}
+  .xp ul li{position:relative;padding-left:20px;color:var(--muted);font-size:15.5px;line-height:1.55;}
+  .xp ul li::before{content:"→";position:absolute;left:0;color:var(--gold-dim);font-family:'JetBrains Mono',monospace;}
+  @media(max-width:680px){.xp{grid-template-columns:1fr;gap:10px;}}
+
+  /* projects */
+  .projects{display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  .proj{
+    background:var(--ink);padding:34px 32px;display:grid;grid-template-columns:48px 1fr auto;gap:28px;
+    align-items:start;transition:background .3s;position:relative;
+  }
+  .proj:hover{background:var(--ink-2);}
+  .proj .pn{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-dim);padding-top:5px;}
+  .proj h3{font-family:'Fraunces',serif;font-size:25px;font-weight:500;}
+  .proj .pdesc{color:var(--muted);margin-top:10px;font-size:15.5px;line-height:1.6;max-width:620px;}
+  .proj .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;}
+  .proj .tags span{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.03em;
+    color:var(--muted);border:1px solid var(--line-soft);padding:4px 10px;border-radius:2px;
+  }
+  .proj .pdate{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);white-space:nowrap;padding-top:7px;}
+  @media(max-width:680px){.proj{grid-template-columns:1fr;gap:8px;}.proj .pdate{display:none;}}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  .skill{background:var(--ink);padding:24px 22px;}
+  .skill .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+  .skill .v{margin-top:10px;color:var(--text);font-size:15.5px;line-height:1.55;}
+  @media(max-width:680px){.skills{grid-template-columns:1fr;}}
+
+  /* achievements */
+  .ach{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .ach .item{border:1px solid var(--line-soft);padding:20px 20px;border-radius:2px;transition:border-color .3s,transform .3s;}
+  .ach .item:hover{border-color:var(--line);transform:translateY(-3px);}
+  .ach .item .t{font-family:'Fraunces',serif;font-size:18px;font-weight:500;line-height:1.3;}
+  .ach .item .d{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.5;}
+  .ach .item .y{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold-dim);letter-spacing:.08em;margin-top:12px;}
+  @media(max-width:680px){.ach{grid-template-columns:1fr;}}
+
+  .certs{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;}
+  .certs span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border:1px solid var(--line-soft);padding:8px 14px;border-radius:2px;}
+  .certs span b{color:var(--gold);font-weight:400;}
+
+  /* contact */
+  .contact{text-align:center;padding:110px 0 60px;}
+  .contact .eyebrow{display:block;margin-bottom:22px;}
+  .contact h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(34px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;}
+  .contact h2 em{font-style:italic;color:var(--gold);}
+  .contact .links{margin-top:40px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line-soft);padding:26px 0;}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .foot span{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted-2);letter-spacing:.05em;}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  /* hero staggered load */
+  .anim{opacity:0;transform:translateY(30px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  .d1{animation-delay:.05s;}.d2{animation-delay:.18s;}.d3{animation-delay:.34s;}.d4{animation-delay:.5s;}.d5{animation-delay:.64s;}
+  @media(prefers-reduced-motion:reduce){.anim,.reveal{animation:none!important;opacity:1!important;transform:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top">MCH<b>.</b></a>
+  <nav class="menu">
+    <a href="#about">01 About</a>
+    <a href="#experience">02 Experience</a>
+    <a href="#work">03 Work</a>
+    <a href="#skills">04 Skills</a>
+    <a href="#contact">05 Contact</a>
+  </nav>
+</header>
+
+<div class="wrap" id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-meta anim d1">
+      <span class="eyebrow">Portfolio — 2026</span>
+      <div class="right">
+        Jakarta, Indonesia<br>
+        Computer Engineering · Binus Aso
+      </div>
+    </div>
+
+    <h1 class="name">
+      <span class="ln anim d2"><span>Marcel</span></span>
+      <span class="ln anim d3"><span>Christian <em>Halim</em></span></span>
+    </h1>
+
+    <p class="hero-sub anim d4">
+      Final-year Computer Engineer bridging <b>data analytics, automation, and financial systems</b> —
+      with hands-on experience across <b>Bank Mandiri</b> and <b>Bank Indonesia</b>. Building toward
+      IT audit &amp; risk advisory.
+    </p>
+
+    <div class="hero-cta anim d5">
+      <a class="btn solid" href="mailto:Lim.marcelch@gmail.com">Get in touch <span class="arr">↗</span></a>
+      <a class="btn" href="https://linkedin.com/in/marcel-christian-halim" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
+      <a class="btn" href="#work">View work</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="sec-head reveal">
+      <span class="num">01</span><h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a final-year Computer Engineering student on the Automotive Robotics track at Binus Aso School of Engineering, working at the intersection of data, automation, and finance.</p>
+        <p>My work spans extracting and modelling corporate financial data, building Microsoft-based automation, and developing end-to-end analytics tools — most recently across the Transaction Banking group at Bank Mandiri and the digital transformation team at Bank Indonesia. Comfortable in Python, the Power Platform, and Google Cloud.</p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><div class="v">3.90</div><div class="l">GPA / 4.00</div></div>
+        <div class="stat"><div class="v">2×</div><div class="l">Banking internships</div></div>
+        <div class="stat"><div class="v">240</div><div class="l">km/kWh · Shell EM</div></div>
+        <div class="stat"><div class="v">10×</div><div class="l">Org funds grown</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="sec-head reveal"><span class="num">02</span><h2>Experience</h2></div>
+
+    <div class="xp reveal">
+      <div class="when">Apr — Jul 2026<br>(est.)</div>
+      <div>
+        <div class="role">Digital Transformation Analyst Intern</div>
+        <div class="org">Bank Indonesia</div>
+        <div class="where">KUPVA BB &amp; BB UKA Team — Kantor Perwakilan BI DKI Jakarta</div>
+        <ul>
+          <li>Developing an enterprise application with Microsoft Power Apps as part of the digital transformation initiative</li>
+          <li>Contributing to the digitization of Bank Indonesia's internal corporate workflows</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xp reveal">
+      <div class="when">Oct 2025 — Mar 2026</div>
+      <div>
+        <div class="role">Data Scientist Intern</div>
+        <div class="org">PT Bank Mandiri (Persero) Tbk.</div>
+        <div class="where">Transaction Banking Wholesale Group — Transaction &amp; International Banking</div>
+        <ul>
+          <li>Extracted and prepared corporate financial-statement datasets for analysis and reporting</li>
+          <li>Built and optimized Microsoft-based automation to streamline data-processing workflows</li>
+          <li>Compiled and analyzed corporate client data to support target identification and prospect evaluation</li>
+          <li>Designed and delivered Finexor, an end-to-end financial data suite for internal analytics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xp reveal">
+      <div class="when">Oct 2023 — Jun 2024</div>
+      <div>
+        <div class="role">Laboratory Assistant</div>
+        <div class="org">Binus Aso School of Engineering</div>
+        <div class="where">Digital System Lab (2023) · Physics II Lab (2024)</div>
+        <ul>
+          <li>Mastered laboratory modules across Pasco, CPLD, and ISE Design Suite</li>
+          <li>Managed and taught experiments for a class of 25 students</li>
+          <li>Graded reports and reviewed students' final-project experiments</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / PROJECTS -->
+  <section class="block" id="work">
+    <div class="sec-head reveal"><span class="num">03</span><h2>Selected Work</h2></div>
+    <div class="projects">
+      <div class="proj reveal">
+        <div class="pn">/01</div>
+        <div>
+          <h3>Finexor — Financial Data Suite</h3>
+          <p class="pdesc">An end-to-end desktop platform automating financial data processing and visualization. Combines an RPA pipeline that pulls real-time data from idx.co.id, a PDF scanner, and machine-learning prediction to support corporate operational analysis.</p>
+          <div class="tags"><span>Python</span><span>RPA</span><span>Machine Learning</span><span>PDF Scanner</span><span>GUI</span><span>Data Scraping</span></div>
+        </div>
+        <div class="pdate">2025 — 2026</div>
+      </div>
+
+      <div class="proj reveal">
+        <div class="pn">/02</div>
+        <div>
+          <h3>Oceanbot — Autonomous Ocean Cleaner</h3>
+          <p class="pdesc">A working prototype that detects floating surface trash through a trained object-detection model and navigates autonomously. Integrated hardware sensors with software control loops, validated through field testing.</p>
+          <div class="tags"><span>Raspberry Pi</span><span>Arduino</span><span>ROS</span><span>Computer Vision</span><span>Object Detection</span></div>
+        </div>
+        <div class="pdate">2024 — 2025</div>
+      </div>
+
+      <div class="proj reveal">
+        <div class="pn">/03</div>
+        <div>
+          <h3>From Classroom to Cashflow</h3>
+          <p class="pdesc">A data-science study investigating the correlation between SDG&nbsp;1 (No Poverty) and SDG&nbsp;4 (Quality Education) using national statistics. Built the full analytical pipeline — scraping, normalization, correlation modelling, and visual reporting.</p>
+          <div class="tags"><span>Python</span><span>Pandas</span><span>Jupyter</span><span>Correlation Analysis</span><span>Data Scraping</span></div>
+        </div>
+        <div class="pdate">2024 — 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="sec-head reveal"><span class="num">04</span><h2>Capabilities</h2></div>
+    <div class="skills">
+      <div class="skill reveal"><div class="k">Programming &amp; Data</div><div class="v">Python (Jupyter, Pandas, NumPy), C++ · data scraping, cleaning, processing, and visualization</div></div>
+      <div class="skill reveal"><div class="k">Machine Learning &amp; AI</div><div class="v">Supervised learning, regression, correlation analysis, and model evaluation</div></div>
+      <div class="skill reveal"><div class="k">Data &amp; BI Platforms</div><div class="v">Power BI, Microsoft Excel, Power Apps, Tableau, SQL</div></div>
+      <div class="skill reveal"><div class="k">Cloud &amp; Analytics</div><div class="v">Google Cloud Platform — Cloud Computing Foundation &amp; Data Analyst learning path</div></div>
+      <div class="skill reveal"><div class="k">Digital Systems</div><div class="v">CPLD, ISE Design Suite, Arduino, Raspberry Pi, ROS, system prototyping</div></div>
+      <div class="skill reveal"><div class="k">Engineering &amp; Design</div><div class="v">SolidWorks, Inventor, Simulation &amp; finite-element analysis, technical documentation</div></div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="block" id="achievements">
+    <div class="sec-head reveal"><span class="num">05</span><h2>Highlights</h2></div>
+    <div class="ach">
+      <div class="item reveal">
+        <div class="t">4th Place — Electric Prototype Division</div>
+        <div class="d">Shell Eco-Marathon at Lusail International Circuit, Qatar — 240 km/kWh, with team Navasena Prambanan II.</div>
+        <div class="y">2025</div>
+      </div>
+      <div class="item reveal">
+        <div class="t">Japan Summer Course Program</div>
+        <div class="d">Aso College Group — Fukuoka, Japan.</div>
+        <div class="y">2025</div>
+      </div>
+      <div class="item reveal">
+        <div class="t">7th Place — 10.5s Bracket</div>
+        <div class="d">Sentul Drag Festival, Sentul International Circuit — 10.56s, with Sigmaspeed Workshop.</div>
+        <div class="y">2025</div>
+      </div>
+      <div class="item reveal">
+        <div class="t">Top 10 National Finalist ×2</div>
+        <div class="d">HK Expertalk Essay (IoT &amp; Cloud Database) and Ewako Greenation (EV Capsule Hotel) — representing Binus University.</div>
+        <div class="y">2023</div>
+      </div>
+    </div>
+    <div class="certs reveal">
+      <span><b>CSWA</b> · Certified SolidWorks Associate, Dassault Systèmes 2025</span>
+      <span><b>BECT</b> · Business English Certification, IBMI 2025</span>
+      <span><b>GCP</b> · Cloud Computing &amp; Analyst Learning Path, Google 2023</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <span class="eyebrow reveal">05 — Contact</span>
+    <h2 class="reveal">Let's build something<br><em>precise.</em></h2>
+    <div class="links reveal">
+      <a class="btn solid" href="mailto:Lim.marcelch@gmail.com">Lim.marcelch@gmail.com <span class="arr">↗</span></a>
+      <a class="btn" href="https://linkedin.com/in/marcel-christian-halim" target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 Marcel Christian Halim</span>
+      <span>Jakarta, Indonesia — Built with care</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        e.target.style.transitionDelay = Math.min(i*60,180)+'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
