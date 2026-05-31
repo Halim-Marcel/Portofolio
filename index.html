@@ -71,14 +71,14 @@
   .xp .role{font-family:'Fraunces',serif;font-size:22px;font-weight:500;}
   .xp .org{color:var(--gold);font-size:14.5px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;margin-top:4px;}
   .xp .where{color:var(--muted-2);font-size:13.5px;margin-top:2px;}
-  .xp-cue{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-dim);letter-spacing:.05em;margin-top:16px;opacity:.65;transition:opacity .25s,color .25s;}
-  .xp:hover .xp-cue{opacity:1;color:var(--gold);}
-  .xp:hover .xp-cue .arr{transform:translate(3px,-3px);}
-  .xp-cue .arr{display:inline-block;transition:transform .25s;}
+  .cue{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-dim);letter-spacing:.05em;margin-top:16px;opacity:.65;transition:opacity .25s,color .25s;}
+  .xp:hover .cue,.proj:hover .cue{opacity:1;color:var(--gold);}
+  .cue .arr{display:inline-block;transition:transform .25s;}
+  .xp:hover .cue .arr,.proj:hover .cue .arr{transform:translate(3px,-3px);}
   @media(max-width:680px){.xp{grid-template-columns:1fr;gap:10px;}}
 
   .projects{display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
-  .proj{background:var(--ink);padding:34px 32px;display:grid;grid-template-columns:48px 1fr auto;gap:28px;align-items:start;transition:background .3s;position:relative;}
+  .proj{background:var(--ink);padding:34px 32px;display:grid;grid-template-columns:48px 1fr auto;gap:28px;align-items:start;transition:background .3s;position:relative;cursor:pointer;}
   .proj:hover{background:var(--ink-2);}
   .proj .pn{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold-dim);padding-top:5px;}
   .proj h3{font-family:'Fraunces',serif;font-size:25px;font-weight:500;line-height:1.15;}
@@ -128,25 +128,35 @@
   /* ---- modal ---- */
   .modal-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(8,7,6,.74);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s;}
   .modal-overlay.open{display:flex;opacity:1;}
-  .modal{background:var(--ink-2);border:1px solid var(--line);border-radius:4px;max-width:600px;width:100%;padding:40px 38px;position:relative;max-height:88vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .35s cubic-bezier(.2,.7,.2,1);box-shadow:0 40px 90px rgba(0,0,0,.5);}
+  .modal{background:var(--ink-2);border:1px solid var(--line);border-radius:4px;max-width:440px;width:100%;padding:40px 38px;position:relative;max-height:90vh;overflow-y:auto;transform:translateY(16px) scale(.98);transition:transform .35s cubic-bezier(.2,.7,.2,1);box-shadow:0 40px 90px rgba(0,0,0,.5);}
+  .modal.modal-wide{max-width:940px;}
   .modal-overlay.open .modal{transform:none;}
-  .modal .x{position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--line-soft);color:var(--muted);width:34px;height:34px;border-radius:2px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:14px;transition:all .25s;}
+  .modal .x{position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--line-soft);color:var(--muted);width:34px;height:34px;border-radius:2px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:14px;transition:all .25s;z-index:2;}
   .modal .x:hover{border-color:var(--gold);color:var(--gold);}
-  .modal .m-when{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;}
-  .modal .m-role{font-family:'Fraunces',serif;font-size:27px;font-weight:500;margin-top:12px;line-height:1.12;padding-right:30px;}
-  .modal .m-org{font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--gold);margin-top:8px;letter-spacing:.02em;}
-  .modal .m-where{color:var(--muted-2);font-size:13.5px;margin-top:3px;}
-  .modal .m-intro{color:var(--text);font-size:15.5px;line-height:1.62;margin-top:22px;}
-  .modal ul.m-list{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:10px;}
-  .modal ul.m-list li{position:relative;padding-left:20px;color:var(--muted);font-size:15px;line-height:1.55;}
-  .modal ul.m-list li::before{content:"\2192";position:absolute;left:0;color:var(--gold-dim);font-family:'JetBrains Mono',monospace;}
-  .m-gallery{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
-  .m-gallery:empty{display:none;}
-  .g-item{margin:0;}
-  .g-item img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;border:1px solid var(--line-soft);display:block;}
-  .g-ph{aspect-ratio:4/3;border:1px dashed var(--line);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted-2);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:10px;gap:6px;}
-  .g-ph small{opacity:.7;font-size:9px;letter-spacing:0;text-transform:none;word-break:break-all;}
-  .g-item figcaption{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em;}
+  .m-cols{display:grid;grid-template-columns:0.82fr 1.18fr;gap:34px;align-items:start;}
+  .m-cols.single{grid-template-columns:1fr;}
+  @media(max-width:760px){.m-cols{grid-template-columns:1fr;gap:26px;}}
+  .m-when{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;}
+  .m-role{font-family:'Fraunces',serif;font-size:26px;font-weight:500;margin-top:12px;line-height:1.14;padding-right:24px;}
+  .m-org{font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--gold);margin-top:8px;letter-spacing:.02em;}
+  .m-where{color:var(--muted-2);font-size:13.5px;margin-top:3px;}
+  .m-intro{color:var(--text);font-size:15px;line-height:1.62;margin-top:20px;}
+  ul.m-list{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:10px;}
+  ul.m-list li{position:relative;padding-left:20px;color:var(--muted);font-size:14.5px;line-height:1.55;}
+  ul.m-list li::before{content:"\2192";position:absolute;left:0;color:var(--gold-dim);font-family:'JetBrains Mono',monospace;}
+  /* media panel */
+  .m-viewer{width:100%;background:var(--ink);border:1px solid var(--line-soft);border-radius:3px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:300px;}
+  .m-viewer img{width:100%;max-height:460px;object-fit:contain;display:block;}
+  .m-viewer object,.m-viewer iframe{width:100%;height:460px;border:0;background:#fff;}
+  .g-ph{width:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted-2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:16px;gap:8px;}
+  .g-ph small{opacity:.7;font-size:9.5px;letter-spacing:0;text-transform:none;word-break:break-all;}
+  .m-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .m-thumb{width:66px;height:50px;border:1px solid var(--line-soft);border-radius:3px;overflow:hidden;cursor:pointer;background:var(--ink);padding:0;opacity:.55;transition:opacity .2s,border-color .2s;display:flex;align-items:center;justify-content:center;}
+  .m-thumb.active{opacity:1;border-color:var(--gold);}
+  .m-thumb img{width:100%;height:100%;object-fit:cover;}
+  .m-thumb .pdficon{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-dim);letter-spacing:.06em;}
+  .m-open{display:inline-block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--gold);letter-spacing:.04em;}
+  .m-open:hover{text-decoration:underline;}
   /* contact modal */
   .contact-list{margin-top:24px;display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
   .c-item{display:flex;flex-direction:column;gap:5px;padding:17px 18px;background:var(--ink);transition:background .25s;}
@@ -226,7 +236,7 @@
         <div class="role">Digital Transformation Analyst Intern</div>
         <div class="org">Bank Indonesia</div>
         <div class="where">KUPVA BB &amp; BB UKA Team — Kantor Perwakilan BI DKI Jakarta</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -236,7 +246,7 @@
         <div class="role">Data Scientist Intern</div>
         <div class="org">PT Bank Mandiri (Persero) Tbk.</div>
         <div class="where">Transaction Banking Wholesale Group — Transaction &amp; International Banking</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -246,7 +256,7 @@
         <div class="role">Research &amp; Development Intern</div>
         <div class="org">Sigma Speed Ciangsana</div>
         <div class="where">Automotive Performance Workshop — Ciangsana</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -256,7 +266,7 @@
         <div class="role">Laboratory Assistant</div>
         <div class="org">Binus Aso School of Engineering</div>
         <div class="where">Digital System Lab (2023) · Physics II Lab (2024)</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
   </section>
@@ -271,7 +281,7 @@
         <div class="role">Co-Coordinator, Chassis Division</div>
         <div class="org">D'Base · Navasena Prambanan II</div>
         <div class="where">Student racing team — vehicle chassis development</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -281,7 +291,7 @@
         <div class="role">Coordinator, Production &amp; Non-Tech Division</div>
         <div class="org">Himpunan Mahasiswa Base (HMB)</div>
         <div class="where">Student association — operations &amp; production</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -291,7 +301,7 @@
         <div class="role">Vice President &amp; Treasurer</div>
         <div class="org">Himpunan Mahasiswa Base (HMB)</div>
         <div class="where">Student association — finance &amp; leadership</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
 
@@ -301,7 +311,7 @@
         <div class="role">Head of Tools Department</div>
         <div class="org">Freshmen Leader &amp; Partner — First Year Program</div>
         <div class="where">Binus Aso — logistics &amp; enrichment</div>
-        <div class="xp-cue">View details <span class="arr">↗</span></div>
+        <div class="cue">View details <span class="arr">↗</span></div>
       </div>
     </div>
   </section>
@@ -310,62 +320,68 @@
   <section class="block" id="work">
     <div class="sec-head reveal"><span class="num">04</span><h2>Selected Work</h2></div>
     <div class="projects">
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('finexor')">
         <div class="pn">/01</div>
         <div>
           <h3>Finexor — Financial Data Suite</h3>
           <p class="pdesc">An end-to-end desktop platform automating financial data processing and visualization. Combines an RPA pipeline that pulls real-time data from idx.co.id, a PDF scanner, and machine-learning prediction to support corporate operational analysis.</p>
           <div class="tags"><span>Python</span><span>RPA</span><span>Machine Learning</span><span>PDF Scanner</span><span>GUI</span><span>Data Scraping</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">2025 — 2026</div>
       </div>
 
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('oceanbot')">
         <div class="pn">/02</div>
         <div>
           <h3>Oceanbot — Autonomous Ocean Cleaner</h3>
           <p class="pdesc">A working prototype that detects floating surface trash through a trained object-detection model and navigates autonomously. Integrated hardware sensors with software control loops, validated through field testing.</p>
           <div class="tags"><span>Raspberry Pi</span><span>Arduino</span><span>ROS</span><span>Computer Vision</span><span>Object Detection</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">2024 — 2025</div>
       </div>
 
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('cashflow')">
         <div class="pn">/03</div>
         <div>
           <h3>Classroom to Cashflow — Correlation Analysis</h3>
           <p class="pdesc">A data-science study modelling the relationship between SDG&nbsp;1 (No Poverty) and SDG&nbsp;4 (Quality Education) from national statistics — applying Linear Regression and K-Nearest Neighbours across the full pipeline: scraping, normalization, modelling, and visual reporting.</p>
           <div class="tags"><span>Python</span><span>Linear Regression</span><span>KNN</span><span>Pandas</span><span>Data Scraping</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">2024 — 2025</div>
       </div>
 
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('wps')">
         <div class="pn">/04</div>
         <div>
           <h3>WPS — Web Parking System</h3>
           <p class="pdesc">A microcontroller-based smart parking system with a web interface for monitoring slot availability and access — built as the final project for the Microcontroller course.</p>
           <div class="tags"><span>Microcontroller</span><span>Web</span><span>IoT</span><span>Sensors</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">Final Project</div>
       </div>
 
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('gocha')">
         <div class="pn">/05</div>
         <div>
           <h3>Gocha-Gocha — Ocha Dispenser</h3>
           <p class="pdesc">An automated tea (ocha) dispenser driven by an electric-current control circuit as its core system — designed and built for the Circuit Electronics final project.</p>
           <div class="tags"><span>Circuit Design</span><span>Analog Electronics</span><span>Sensors</span><span>Prototyping</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">Final Project</div>
       </div>
 
-      <div class="proj reveal">
+      <div class="proj reveal" onclick="openDetail('greenhouse')">
         <div class="pn">/06</div>
         <div>
           <h3>Smart Portable Greenhouse</h3>
           <p class="pdesc">A portable greenhouse that monitors and regulates plant-growing conditions, built on an Arduino board as the main controller — developed for the Physical Computing final project.</p>
           <div class="tags"><span>Arduino</span><span>Sensors</span><span>Physical Computing</span><span>IoT</span></div>
+          <div class="cue">View details <span class="arr">↗</span></div>
         </div>
         <div class="pdate">Final Project</div>
       </div>
@@ -483,23 +499,31 @@
 
 </div>
 
-<!-- UNIVERSAL DETAIL MODAL -->
+<!-- UNIVERSAL DETAIL MODAL (two-column: details + media) -->
 <div class="modal-overlay" id="detailModal" onclick="if(event.target===this)closeAll()">
-  <div class="modal" role="dialog" aria-modal="true">
+  <div class="modal modal-wide" role="dialog" aria-modal="true">
     <button class="x" type="button" onclick="closeAll()" aria-label="Close">✕</button>
-    <span class="m-when" id="mWhen"></span>
-    <div class="m-role" id="mTitle"></div>
-    <div class="m-org" id="mSub"></div>
-    <div class="m-where" id="mWhere"></div>
-    <p class="m-intro" id="mIntro"></p>
-    <ul class="m-list" id="mList"></ul>
-    <div class="m-gallery" id="mGallery"></div>
+    <div class="m-cols" id="mCols">
+      <div class="m-left">
+        <span class="m-when" id="mWhen"></span>
+        <div class="m-role" id="mTitle"></div>
+        <div class="m-org" id="mSub"></div>
+        <div class="m-where" id="mWhere"></div>
+        <p class="m-intro" id="mIntro"></p>
+        <ul class="m-list" id="mList"></ul>
+      </div>
+      <div class="m-right" id="mRight">
+        <div class="m-viewer" id="mViewer"></div>
+        <div class="m-thumbs" id="mThumbs"></div>
+        <a class="m-open" id="mOpen" target="_blank" rel="noopener" href="#">Open file ↗</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- CONTACT MODAL -->
 <div class="modal-overlay" id="contactModal" onclick="if(event.target===this)closeAll()">
-  <div class="modal" role="dialog" aria-modal="true" style="max-width:440px">
+  <div class="modal" role="dialog" aria-modal="true">
     <button class="x" type="button" onclick="closeAll()" aria-label="Close">✕</button>
     <span class="m-when">Get in touch</span>
     <div class="m-role">Contact</div>
@@ -528,88 +552,144 @@
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
   /* ---- DETAIL DATA ----
-     To add photos: drop image files into the assets/ folder at the paths shown
-     in each "src" below. Missing images show a labelled placeholder automatically. */
+     Media: drop files into assets/ at the path shown in each "src".
+     A path ending in .pdf renders as an embedded PDF on the right; anything
+     else renders as an image. Missing files show a labelled placeholder. */
   var DATA = {
     // ---- Professional experience ----
     bi:{when:"Apr — Jul 2026 (est.)", title:"Digital Transformation Analyst Intern", sub:"Bank Indonesia",
       where:"KUPVA BB & BB UKA Team — Kantor Perwakilan BI DKI Jakarta",
       intro:"Joined Bank Indonesia's digital transformation effort at the DKI Jakarta representative office, supporting the KUPVA BB & BB UKA unit.",
       bullets:["Developing an enterprise application with Microsoft Power Apps as part of the digital transformation initiative","Contributing to the digitization of Bank Indonesia's internal corporate workflows","Translating manual processes into structured, maintainable digital systems"],
-      images:[{src:"assets/experience/bi-1.jpg",cap:"Bank Indonesia"},{src:"assets/experience/bi-2.jpg",cap:""}]},
+      media:[{src:"assets/experience/bi-1.jpg",cap:"Bank Indonesia"},{src:"assets/experience/bi-2.jpg",cap:""}]},
     mandiri:{when:"Oct 2025 — Mar 2026", title:"Data Scientist Intern", sub:"PT Bank Mandiri (Persero) Tbk.",
       where:"Transaction Banking Wholesale Group — Transaction & International Banking",
       intro:"Worked within the Transaction Banking Wholesale Group on corporate financial data, automation, and analytics.",
       bullets:["Extracted and prepared corporate financial-statement datasets for analysis and reporting","Built and optimized Microsoft-based automation to streamline data-processing workflows","Compiled and analyzed corporate client data to support target identification and prospect evaluation","Designed and delivered Finexor, an end-to-end financial data suite for internal analytics"],
-      images:[{src:"assets/experience/mandiri-1.jpg",cap:"Bank Mandiri"},{src:"assets/experience/mandiri-2.jpg",cap:""}]},
+      media:[{src:"assets/experience/mandiri-1.jpg",cap:"Bank Mandiri"},{src:"assets/experience/mandiri-2.jpg",cap:""}]},
     sigma:{when:"Sep 2024 — Jun 2025", title:"Research & Development Intern", sub:"Sigma Speed Ciangsana",
       where:"Automotive Performance Workshop — Ciangsana",
       intro:"Hands-on automotive R&D at Sigma Speed's workshop, supporting vehicle performance development, build, and competition testing.",
       bullets:["Supported research and development on vehicle performance and drivetrain tuning","Assisted with build, instrumentation, and validation testing of competition vehicles","Contributed to race preparation, including the Sentul Drag Festival (7th place, 10.56s bracket)"],
-      images:[{src:"assets/experience/sigma-1.jpg",cap:"Sigma Speed"},{src:"assets/experience/sigma-2.jpg",cap:""}]},
+      media:[{src:"assets/experience/sigma-1.jpg",cap:"Sigma Speed"},{src:"assets/experience/sigma-2.jpg",cap:""}]},
     lab:{when:"Oct 2023 — Jun 2024", title:"Laboratory Assistant", sub:"Binus Aso School of Engineering",
       where:"Digital System Lab (2023) · Physics II Lab (2024)",
       intro:"Assisted teaching and laboratory operations across two engineering laboratories at Binus Aso.",
       bullets:["Mastered laboratory modules across Pasco, CPLD, and ISE Design Suite","Managed and taught experiments for a class of 25 students","Graded reports and reviewed students' final-project experiments"],
-      images:[{src:"assets/experience/lab-1.jpg",cap:"Digital System Lab"}]},
+      media:[{src:"assets/experience/lab-1.jpg",cap:"Digital System Lab"}]},
     // ---- Organizational experience ----
     chassis:{when:"Jul 2024 — Feb 2025", title:"Co-Coordinator, Chassis Division", sub:"D'Base · Navasena Prambanan II",
       where:"Student racing team — vehicle chassis development",
       intro:"Co-led the chassis redesign for the Navasena Prambanan II competition vehicle within team D'Base.",
       bullets:["Co-led the chassis redesign of Navasena Prambanan II","Validated structural performance with SolidWorks Simulation","Passed all international technical inspections"],
-      images:[{src:"assets/org/chassis-1.jpg",cap:"Navasena Prambanan II"},{src:"assets/org/chassis-2.jpg",cap:""}]},
+      media:[{src:"assets/org/chassis-1.jpg",cap:"Navasena Prambanan II"},{src:"assets/org/chassis-2.jpg",cap:""}]},
     hmbprod:{when:"Apr 2024 — Jan 2025", title:"Coordinator, Production & Non-Tech Division", sub:"Himpunan Mahasiswa Base (HMB)",
       where:"Student association — operations & production",
       intro:"Built the Production & Non-Tech division of HMB from the ground up.",
       bullets:["Set up the division from scratch — workflows, timetables, inventory logs, and cashflow records","Trained members on tooling, materials, and drivetrain systems"],
-      images:[{src:"assets/org/hmb-prod-1.jpg",cap:"HMB"}]},
+      media:[{src:"assets/org/hmb-prod-1.jpg",cap:"HMB"}]},
     hmbvp:{when:"Sep 2023 — Jul 2024", title:"Vice President & Treasurer", sub:"Himpunan Mahasiswa Base (HMB)",
       where:"Student association — finance & leadership",
       intro:"Held primary fiduciary responsibility for HMB and served as a financial and operational advisor.",
       bullets:["Held primary fiduciary responsibility for the association's cashflow — recording and reporting all inflows and outflows","Grew organizational funds to roughly 10× their starting value through disciplined budgeting and event monetization","Served as financial and operational advisor to six major events, reviewing budgets and approving disbursements"],
-      images:[{src:"assets/org/hmb-vp-1.jpg",cap:"HMB Leadership"}]},
+      media:[{src:"assets/org/hmb-vp-1.jpg",cap:"HMB Leadership"}]},
     fyp:{when:"Jul 2023 — Jun 2024", title:"Head of Tools Department", sub:"Freshmen Leader & Partner — First Year Program",
       where:"Binus Aso — logistics & enrichment",
       intro:"Led logistics and tooling for the First Year Program as a Freshmen Leader & Partner.",
       bullets:["Designed the logistics layout for a 100-participant event","Prepared paperwork, cashflow, and inventory tracking through the Enrichment Program"],
-      images:[{src:"assets/org/fyp-1.jpg",cap:"First Year Program"}]},
+      media:[{src:"assets/org/fyp-1.jpg",cap:"First Year Program"}]},
+    // ---- Selected work / projects ----
+    finexor:{when:"2025 — 2026", title:"Finexor — Financial Data Suite", sub:"Data Science & ML",
+      intro:"An end-to-end desktop platform automating financial data processing and visualization for corporate operational analysis.",
+      bullets:["Built a full suite for automated financial data processing and visualization","Developed an RPA pipeline pulling real-time data from idx.co.id","Integrated a PDF scanner and machine-learning prediction into one workflow"],
+      media:[{src:"assets/work/finexor-1.jpg",cap:"Finexor"},{src:"assets/work/finexor-2.jpg",cap:""}]},
+    oceanbot:{when:"2024 — 2025", title:"Oceanbot — Autonomous Ocean Cleaner", sub:"Control System & ML",
+      intro:"A working prototype that detects floating surface trash and navigates autonomously to collect it.",
+      bullets:["Trained an object-detection model to identify floating surface trash","Built autonomous navigation integrating sensors with software control loops","Validated performance through field testing"],
+      media:[{src:"assets/work/oceanbot-1.jpg",cap:"Oceanbot"},{src:"assets/work/oceanbot-2.jpg",cap:""}]},
+    cashflow:{when:"2024 — 2025", title:"Classroom to Cashflow — Correlation Analysis", sub:"Data Science & ML",
+      intro:"A data-science study modelling the relationship between SDG 1 (No Poverty) and SDG 4 (Quality Education) from national statistics.",
+      bullets:["Applied Linear Regression and K-Nearest Neighbours to national indicators","Scraped and normalized multi-source data on education and economic outcomes","Built the full pipeline: scraping, normalization, modelling, and visual reporting"],
+      media:[{src:"assets/work/cashflow-1.jpg",cap:"Analysis output"}]},
+    wps:{when:"Microcontroller · Final Project", title:"WPS — Web Parking System", sub:"Microcontroller Final Project",
+      intro:"A microcontroller-based smart parking system with a web interface for monitoring slot availability and access.",
+      bullets:["Built slot-availability monitoring on a microcontroller","Exposed a web interface for real-time parking status","[Add the board, sensors, and stack used so this reads accurately.]"],
+      media:[{src:"assets/work/wps-1.jpg",cap:"WPS"}]},
+    gocha:{when:"Circuit Electronics · Final Project", title:"Gocha-Gocha — Ocha Dispenser", sub:"Circuit Electronics Final Project",
+      intro:"An automated tea (ocha) dispenser driven by an electric-current control circuit as its core system.",
+      bullets:["Designed the analog control circuit as the dispenser's main system","Built and tested the dispensing mechanism end-to-end","[Add the components and how the current-based control works.]"],
+      media:[{src:"assets/work/gocha-1.jpg",cap:"Gocha-Gocha"}]},
+    greenhouse:{when:"Physical Computing · Final Project", title:"Smart Portable Greenhouse", sub:"Physical Computing Final Project",
+      intro:"A portable greenhouse that monitors and regulates plant-growing conditions, built on an Arduino board.",
+      bullets:["Used Arduino as the main controller for environment regulation","Monitored conditions with sensors and automated responses","[Add which conditions (temperature, humidity, light) and actuators were used.]"],
+      media:[{src:"assets/work/greenhouse-1.jpg",cap:"Smart Greenhouse"}]},
     // ---- Highlights ----
     shell:{when:"2025", title:"4th Place — Shell Eco-Marathon", sub:"Electric Prototype Division · Lusail, Qatar",
       intro:"Achieved 240 km/kWh at Lusail International Circuit with team Navasena Prambanan II.",
-      images:[{src:"assets/highlights/shell.jpg",cap:"Shell Eco-Marathon 2025"}]},
+      media:[{src:"assets/highlights/shell.jpg",cap:"Shell Eco-Marathon 2025"}]},
     drag:{when:"2025", title:"7th Place — Sentul Drag Festival", sub:"10.5s Bracket · Sentul International Circuit",
       intro:"Clocked 10.56 seconds with Sigmaspeed Workshop.",
-      images:[{src:"assets/highlights/drag.jpg",cap:"Sentul Drag Festival 2025"}]},
+      media:[{src:"assets/highlights/drag.jpg",cap:"Sentul Drag Festival 2025"}]},
     hk:{when:"2023", title:"Top 10 National Finalist — HK Essay Competition", sub:"Hutama Karya Expertalk",
-      intro:"Selected as a national finalist for \"Tracer: IoT & Cloud Database Solution\", a proposal addressing Indonesia's infrastructure, representing Binus University.",
-      images:[{src:"assets/highlights/hk.jpg",cap:"HK Expertalk 2023"}]},
+      intro:"National finalist for \"Tracer: IoT & Cloud Database Solution\", a proposal addressing Indonesia's infrastructure, representing Binus University.",
+      media:[{src:"assets/highlights/hk.jpg",cap:"HK Expertalk 2023"}]},
     ewako:{when:"2023", title:"Top 10 Finalist — Ewako Greenation", sub:"PT Pertamina (Persero)",
       intro:"National finalist for \"Turbox.id: EV Capsule Hotel\", a renewable-energy / net-zero-emission solution, representing Binus University.",
-      images:[{src:"assets/highlights/ewako.jpg",cap:"Ewako Greenation 2023"}]},
+      media:[{src:"assets/highlights/ewako.jpg",cap:"Ewako Greenation 2023"}]},
     intl:{when:"—", title:"Top 10 International Finalist & Conference Speaker", sub:"International Competition / Conference",
       intro:"Selected as a top-10 international finalist and invited as a conference speaker. [Add the competition or conference name, your topic, and the year so this reads accurately.]",
-      images:[{src:"assets/highlights/intl.jpg",cap:""}]},
-    // ---- Certifications (image-only) ----
-    pwc:{title:"IT Audit", sub:"PwC", images:[{src:"assets/certs/pwc.jpg",cap:""}]},
-    revou:{title:"Data Analyst Workshop", sub:"RevoU", images:[{src:"assets/certs/revou.jpg",cap:""}]},
-    japan:{title:"Japan Summer Course Program", sub:"Aso College Group · Fukuoka · 2025", images:[{src:"assets/certs/japan.jpg",cap:""}]},
-    cswa:{title:"Certified SolidWorks Associate (CSWA)", sub:"Dassault Systèmes · 2025", images:[{src:"assets/certs/cswa.jpg",cap:""}]},
-    gcp:{title:"Google Cloud — Computing & Analyst Path", sub:"Google Cloud · 2023", images:[{src:"assets/certs/gcp.jpg",cap:""}]},
-    bect:{title:"Business English Certification (BECT)", sub:"IBMI · 2025", images:[{src:"assets/certs/bect.jpg",cap:""}]},
-    toefl:{title:"TOEFL EPT", sub:"English Proficiency Test", images:[{src:"assets/certs/toefl.jpg",cap:""}]}
+      media:[{src:"assets/highlights/intl.jpg",cap:""}]},
+    // ---- Certifications (PDF on the right; swap .pdf to .jpg if yours are images) ----
+    pwc:{title:"IT Audit", sub:"PwC", media:[{src:"assets/certs/pwc.pdf",cap:""}]},
+    revou:{title:"Data Analyst Workshop", sub:"RevoU", media:[{src:"assets/certs/revou.pdf",cap:""}]},
+    japan:{title:"Japan Summer Course Program", sub:"Aso College Group · Fukuoka · 2025", media:[{src:"assets/certs/japan.pdf",cap:""}]},
+    cswa:{title:"Certified SolidWorks Associate (CSWA)", sub:"Dassault Systèmes · 2025", media:[{src:"assets/certs/cswa.pdf",cap:""}]},
+    gcp:{title:"Google Cloud — Computing & Analyst Path", sub:"Google Cloud · 2023", media:[{src:"assets/certs/gcp.pdf",cap:""}]},
+    bect:{title:"Business English Certification (BECT)", sub:"IBMI · 2025", media:[{src:"assets/certs/bect.pdf",cap:""}]},
+    toefl:{title:"TOEFL EPT", sub:"English Proficiency Test", media:[{src:"assets/certs/toefl.pdf",cap:""}]}
   };
 
-  function galleryHTML(images){
-    if(!images || !images.length) return '';
-    return images.map(function(im){
-      return '<figure class="g-item">'+
-        '<img src="'+im.src+'" alt="'+(im.cap||'')+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
-        '<div class="g-ph" style="display:none">Image placeholder<small>'+im.src+'</small></div>'+
-        (im.cap ? '<figcaption>'+im.cap+'</figcaption>' : '')+
-      '</figure>';
-    }).join('');
+  var CUR = [];
+  function isPdf(src){ return /\.pdf($|\?)/i.test(src); }
+  function imgFallback(el){
+    var p = el.getAttribute('data-src') || '';
+    var d = document.createElement('div');
+    d.className = 'g-ph';
+    d.innerHTML = 'Image placeholder<small>'+p+'</small>';
+    el.replaceWith(d);
   }
-  function setText(id,val){var el=document.getElementById(id);if(!val){el.style.display='none';el.textContent='';}else{el.style.display='';el.textContent=val;}}
+  function viewerHTML(im){
+    if(isPdf(im.src)){
+      return '<object data="'+im.src+'" type="application/pdf"><div class="g-ph">PDF preview unavailable here<small>'+im.src+'</small></div></object>';
+    }
+    return '<img src="'+im.src+'" data-src="'+im.src+'" alt="'+(im.cap||'')+'" onerror="imgFallback(this)">';
+  }
+  function thumbHTML(im,i){
+    var inner = isPdf(im.src)
+      ? '<span class="pdficon">PDF</span>'
+      : '<img src="'+im.src+'" data-src="'+im.src+'" alt="" onerror="imgFallback(this)">';
+    return '<button class="m-thumb'+(i===0?' active':'')+'" type="button" onclick="showMedia('+i+')">'+inner+'</button>';
+  }
+  function renderMedia(media){
+    CUR = media || [];
+    var right = document.getElementById('mRight');
+    var cols = document.getElementById('mCols');
+    if(!CUR.length){ right.style.display='none'; cols.classList.add('single'); return; }
+    right.style.display=''; cols.classList.remove('single');
+    var thumbs = document.getElementById('mThumbs');
+    if(CUR.length > 1){ thumbs.style.display=''; thumbs.innerHTML = CUR.map(thumbHTML).join(''); }
+    else { thumbs.style.display='none'; thumbs.innerHTML=''; }
+    showMedia(0);
+  }
+  function showMedia(i){
+    var im = CUR[i]; if(!im) return;
+    document.getElementById('mViewer').innerHTML = viewerHTML(im);
+    var open = document.getElementById('mOpen');
+    open.href = im.src; open.textContent = (isPdf(im.src) ? 'Open PDF ↗' : 'Open image ↗');
+    var ts = document.querySelectorAll('#mThumbs .m-thumb');
+    ts.forEach(function(t,idx){ t.classList.toggle('active', idx===i); });
+  }
+  function setText(id,val){ var el=document.getElementById(id); if(!val){el.style.display='none';el.textContent='';} else {el.style.display='';el.textContent=val;} }
   function openDetail(id){
     var d = DATA[id]; if(!d) return;
     setText('mWhen', d.when);
@@ -619,9 +699,10 @@
     var intro = document.getElementById('mIntro');
     if(d.intro){intro.textContent=d.intro;intro.style.display='';}else{intro.style.display='none';}
     var ul = document.getElementById('mList'); ul.innerHTML='';
-    if(d.bullets && d.bullets.length){ul.style.display='';d.bullets.forEach(function(b){var li=document.createElement('li');li.textContent=b;ul.appendChild(li);});}
-    else{ul.style.display='none';}
-    document.getElementById('mGallery').innerHTML = galleryHTML(d.images);
+    if(d.bullets && d.bullets.length){ ul.style.display=''; d.bullets.forEach(function(b){var li=document.createElement('li');li.textContent=b;ul.appendChild(li);}); }
+    else { ul.style.display='none'; }
+    renderMedia(d.media);
+    document.getElementById('detailModal').querySelector('.modal').scrollTop = 0;
     showModal('detailModal');
   }
   function openContact(){ showModal('contactModal'); }
